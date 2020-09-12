@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>FX Rates</title>
+  </head>
+
+  <body>
+    <header class="bg-info text-white py-5">
+      <div class="container text-center">
+        <h1>Euro FX rates reference</h1>
+        <p class="lead">Rates from https://exchangeratesapi.io/, data published by the European Central Bank</p>
+      </div>
+    </header>
+    <div class="container py-4" role="main">
+      <div class="row justify-content-center">
+        <div class="col-sm">
+          <form>
+            <div class="form-group form-col col-sm-8">
+              <label for="base" class="col-sm col-form-label">Base:</label>
+              <div class="col-sm">
+                <select class="form-control" id="base">
+                  <option value="EUR">EUR</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group form-col col-sm-8">
+              <label for="date" class="col-sm col-form-label">Date:</label>
+              <div class="col-sm">
+                <input type="date" class="form-control" id="date" min="1999-01-01">
+              </div>
+              <div class="col-sm-4"></div>
+            </div>
+            <div class="form-group form-col col-sm-8">
+              <div class="col-sm">
+                <button type="button" class="btn btn-outline-info form-control" id="update">Update</button>
+              </div>
+            </div>
+          </form>
+          
+        </div>
+        <div class="col-sm">
+          <h3 id="ratesTitle"></h1>
+          <table class="table table-sm">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Currency</th>
+                <th scope="col">Spot</th>
+              </tr>
+            </thead>
+            <tbody id="ratesBody">
+            </tbody>
+          </table>
+          <p class="text-danger hidden" id="ratesAlert"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="src/index.js"></script>
+</html>
