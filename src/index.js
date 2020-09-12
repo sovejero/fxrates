@@ -10,6 +10,7 @@ setDate();
 function updateRates(){
     removeRates();
     const [base, date] = readBaseAndDate();
+    removeBaseOptions();
     getFxRates(base, date);
 }
 
@@ -67,6 +68,11 @@ function setBaseOptions(response){
         optionNode.textContent = key;
         $base.appendChild(optionNode);        
     });
+}
+
+function removeBaseOptions(){
+    const $base = document.querySelector('#base');
+    $base.innerHTML = '';
 }
 
 function createRateRow(currency, spot){
