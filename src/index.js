@@ -59,13 +59,20 @@ function updateRatesTitle(base = 'EUR', date){
 }
 
 function setBaseOptions(response){
-    const currencies = Object.keys(response.rates).concat(response.base).sort();
+    let currencies = Object.keys(response.rates);
     const $base = document.querySelector('#base');
-    //currencies.sort();
+    if (response.base === "EUR"){
+        currencies.push(response.base);
+    }
+    currencies.sort();
+    
     currencies.forEach(key => {
         optionNode = document.createElement('option');
         optionNode.setAttribute('value', key);
         optionNode.textContent = key;
+        if (key === response.base){
+            optionNode.setAttribute('selected', '');
+        }
         $base.appendChild(optionNode);        
     });
 }
