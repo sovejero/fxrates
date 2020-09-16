@@ -1,11 +1,10 @@
-const URL_PREFIX = 'https://api.exchangeratesapi.io/';
-const $ratesBody = document.querySelector('#ratesBody');
-const $update = document.querySelector('#update');
+function setUp(){
+    const $update = document.querySelector('#update');
+    $update.onclick = updateRates;
 
-$update.onclick = updateRates;
-
-getFxRates();
-setDate();
+    getFxRates();
+    setDate();
+}
 
 function updateRates(){
     removeRates();
@@ -15,7 +14,7 @@ function updateRates(){
 }
 
 function getFxRates(base = 'EUR', date = 'latest'){
-    const URL = `${URL_PREFIX}${date}?base=${base}`;
+    const URL = `https://api.exchangeratesapi.io/${date}?base=${base}`;
     fetch(URL)
         .then( response => response.json() )
         .then( response => {showRates(response);} )
@@ -29,15 +28,16 @@ function showRates(response){
     updateRatesTitle(response.base, response.date)
 }
 
-
+setUp();
 
 function removeRates(){
+    const $ratesBody = document.querySelector('#ratesBody');
     $ratesBody.innerHTML = '';
 }
 
 function showAlert(error){
     console.error('Fetch problem: ', error);
-
+    
     const $ratesAlert = document.querySelector('#ratesAlert');
     $ratesAlert.textContent = error;
 }
@@ -85,14 +85,16 @@ function createRateRow(currency, spot){
     tableRow.appendChild(tdCurrency);
     tableRow.appendChild(tdSpot);
     
-    $ratesBody.appendChild(tableRow);
+    return tableRow; 
 }
 
 function populateRatesBody(rates){
+    const $ratesBody = document.querySelector('#ratesBody');
     let arrRates = Object.entries(rates);
     arrRates.sort( (a, b) => a[0].localeCompare(b[0]) );
     for (const [currency, spot] of arrRates) {
-        createRateRow(currency, spot);
+        let tableRow = createRateRow(currency, spot);
+        $ratesBody.appendChild(tableRow);
       }
 }
 
@@ -100,7 +102,7 @@ function setDate(){
     const $date = document.querySelector('#date');
     let today = new Date();
     let dd = today.getDate();
-    let mm = today.getMonth() + 1; // Enero empieza en 0
+    let mm = today.getMonth() + 1;
     const yyyy = today.getFullYear();
     if (dd < 10) {
         dd = `0${dd}`;
