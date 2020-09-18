@@ -17,7 +17,7 @@ function getFxRates(base = 'EUR', date = 'latest'){
     const URL = `https://api.exchangeratesapi.io/${date}?base=${base}`;
     fetch(URL)
         .then( response => response.json() )
-        .then( response => {showRates(response);} )
+        .then( response => showRates(response) )
         .catch( error => showAlert(error) );
 }
 
