@@ -8,9 +8,8 @@ function setUp(){
 
 function updateRates(){
     removeRates();
-    const [base, date] = readBaseAndDate();
     removeBaseOptions();
-    getFxRates(base, date);
+    getFxRates(readBase(), readDate());
 }
 
 function getFxRates(base = 'EUR', date = 'latest'){
@@ -27,8 +26,6 @@ function showRates(response){
     populateRatesBody(response.rates);
     updateRatesTitle(response.base, response.date)
 }
-
-setUp();
 
 function removeRates(){
     const $ratesBody = document.querySelector('#ratesBody');
@@ -47,10 +44,12 @@ function removeAlert(){
     $ratesAlert.textContent = '';
 }
 
-function readBaseAndDate(){
-    const base = document.querySelector('#base').value;
-    const date = document.querySelector('#date').value;
-    return [base, date];
+function readBase(){
+    return document.querySelector('#base').value;
+}
+
+function readDate(){
+    return  document.querySelector('#date').value;
 }
 
 function updateRatesTitle(base = 'EUR', date){
@@ -117,3 +116,5 @@ function setDate(){
     $date.setAttribute('max', today);
     $date.setAttribute('value', today);
 }
+
+setUp();
