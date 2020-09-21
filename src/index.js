@@ -107,17 +107,12 @@ function populateRatesBody(rates){
 
 function setDate(){
     const $date = document.querySelector('#date');
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth() + 1;
-    const yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = `0${dd}`;
-    }
-    if (mm < 10) {
-        mm = `0${mm}`;
-    }
-    today = `${yyyy}-${mm}-${dd}`;
+    const todayDate = new Date();
+    const year = new Intl.DateTimeFormat('en', {year: 'numeric'}).format(todayDate);
+    const month = new Intl.DateTimeFormat('en', {month: '2-digit'}).format(todayDate);
+    const day = new Intl.DateTimeFormat('en', {day: '2-digit'}).format(todayDate);
+    const today = `${year}-${month}-${day}`
+    //const today = dateToday.toISOString().slice(0, 10); UTC only
 
     $date.setAttribute('max', today);
     $date.setAttribute('value', today);
