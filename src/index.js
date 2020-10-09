@@ -21,8 +21,10 @@ function setUp(){
 
 function updateRates(){
     removeRates();
+    const base = readBase();
+    const date = readDate();
     removeBaseOptions();
-    getFxRates(readBase(), readDate());
+    getFxRates(base, date);
 }
 
 function getFxRates(base = 'EUR', date = 'latest'){
