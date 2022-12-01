@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cypress-run": "cypress run",
-    "cypress-dev": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:dev": "cypress open",
+    "server:start": "http-server -c 1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,6 +15,10 @@
     "bootstrap": "^4.5.2"
   },
   "devDependencies": {
-    "cypress": "^5.1.0"
+    "cypress": "^5.1.0",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "http-server": "^14.1.1"
   }
 }
